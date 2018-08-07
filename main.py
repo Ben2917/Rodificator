@@ -23,14 +23,13 @@ unicodeU = ['ú', 'Ú', 'ų́', 'Ų́', 'ứ', 'Ứ']
 ## Chances
 unicode_chance = 5
 capital_chance = 50
+prepend_chance = 2
 
 ## Selected Users
-selected_users = ['realdonaldtrump', 'officialmcrich', 'COOLPOP59', 
-            'Juliadante34', 'spunkymunkeymus', 'NelsonMandela', 'Bible_Time', 
-            'Simonblox']
+selected_users = ['realdonaldtrump', 'Juliadante34', 'NelsonMandela', 'Bible_Time', 'Simonblox']
 
 ## Twitter Pages
-twitter_pages = 1
+twitter_pages = 2
 
 ## Menu Options
 menu_options = ['Custom Sentence', 'Random Tweet [select user]', 'Random Tweet [random user]', 
@@ -55,7 +54,7 @@ def main_menu():
 
 ### User Selection
 def print_user(user):
-    print("Twitter User: " + user + "\n")
+    print("\n# Twitter User: " + user + "\n")
 
 def custom_user():
     user = ""
@@ -71,11 +70,14 @@ def random_user():
 
 ### Sentence Selection
 def print_sentence(title, sentence):
-    print("\n" + title + ":\n" + sentence)
+    print("\n# " + title + ":\n" + sentence)
 
 def clipboard_sentence(sentence):
     pyperclip.copy(sentence)
     print("\n## Copied To Clipboard ##\n")
+
+def printGeneratedNotice():
+    print("# Notice:\nAutoGen Tweets are based on a markov model created via the most recent tweets")
 
 def custom_sentence():
     sentence = ""
@@ -95,6 +97,7 @@ def random_tweet(user):
     return sentence
 
 def generated_tweet(user):
+    printGeneratedNotice()
     sentence = ""
     while " " not in sentence:
         tweets = '\n'.join([t['text'] for t in get_tweets(str(user), pages=5)])
@@ -108,7 +111,8 @@ def prepend_nouns(sentence):
     split_sentence = pos_tag(sentence.split())
     nouns = [word for word,pos in split_sentence if pos == 'NNP']
     for s in nouns:
-        sentence = sentence.replace(str(s), str(prenoun[randint(0,len(prenoun)-1)] + " " + str(s)), 1)
+        if(randint(1, prepend_chance) == 1):
+            sentence = sentence.replace(str(s), str(prenoun[randint(0,len(prenoun)-1)] + " " + str(s)), 1)
     return sentence
 
 def tailends(sentence):
