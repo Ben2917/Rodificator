@@ -8,6 +8,8 @@ from nltk.tag import pos_tag
 from random import randint
 import markovify
 
+nltk.download('averaged_perceptron_tagger')
+
 ## Vars
 greetings = ['Bonkour', 'Henlo']
 prenoun = ['les', 'le']
@@ -70,6 +72,10 @@ def random_user():
 ### Sentence Selection
 def print_sentence(title, sentence):
     print("\n" + title + ":\n" + sentence)
+
+def clipboard_sentence(sentence):
+    pyperclip.copy(sentence)
+    print("\n## Copied To Clipboard ##\n")
 
 def custom_sentence():
     sentence = ""
@@ -159,6 +165,8 @@ def main():
             running = False
         sentence = random_unicode(random_uppercase(tailends(prepend_nouns(sentence))))
         print_sentence("Roddified Sentence", sentence)
+        clipboard_sentence(sentence)
+
 
 main()
 
