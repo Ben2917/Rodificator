@@ -30,7 +30,7 @@ selected_users = ['realdonaldtrump', 'officialmcrich', 'COOLPOP59',
             'Simonblox']
 
 ## Twitter Pages
-twitter_pages = 5
+twitter_pages = 1
 
 ## Menu Options
 menu_options = ['Custom Sentence', 'Random Tweet [select user]', 'Random Tweet [random user]', 
