@@ -90,7 +90,7 @@ def random_tweet(user):
     sentence = ""
     while " " not in sentence:
         tweets = []
-        for tweet in get_tweets(selected_users[randint(0, len(selected_users)-1)], pages=twitter_pages):
+        for tweet in get_tweets(user, pages=twitter_pages):
             tweets.append(str(tweet['text']))
         sentence = str(tweets[randint(0, len(tweets)-1)])
     print_sentence("Random Tweet", sentence)
@@ -107,6 +107,12 @@ def generated_tweet(user):
     return sentence
 
 ### Roddy Time
+def roddify(sentence):
+    sentence = random_unicode(random_uppercase(tailends(prepend_nouns(sentence))))
+    print_sentence("Roddified Sentence", sentence)
+    clipboard_sentence(sentence)
+    input("Press [Enter] to continue...")
+
 def prepend_nouns(sentence):
     split_sentence = pos_tag(sentence.split())
     nouns = [word for word,pos in split_sentence if pos == 'NNP']
@@ -153,24 +159,25 @@ def main():
         selection = int(main_menu())
         if selection == 1:
             sentence = custom_sentence()
+            roddify(sentence)
         elif selection == 2:
             user = custom_user()
             sentence = random_tweet(user)
+            roddify(sentence)
         elif selection == 3:
             user = random_user()
             sentence = random_tweet(user)
+            roddify(sentence)
         elif selection == 4:
             user = custom_user()
-            sentence =generated_tweet(user)
+            sentence = generated_tweet(user)
+            roddify(sentence)
         elif selection == 5:
             user = random_user()
-            sentence =generated_tweet(user)
+            sentence = generated_tweet(user)
+            roddify(sentence)
         elif selection == 6:
             running = False
-        sentence = random_unicode(random_uppercase(tailends(prepend_nouns(sentence))))
-        print_sentence("Roddified Sentence", sentence)
-        clipboard_sentence(sentence)
-
 
 main()
 
