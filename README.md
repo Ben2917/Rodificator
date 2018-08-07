@@ -13,4 +13,12 @@ Contact for information of buying snail shells
     
 #### Run
     >>> python3 main.py
+    
+#### Upcoming
+* Push back to twitter
+* Generate Replies
+
+#### Thanks
+The HTTP twitter scraper
+https://github.com/kennethreitz/twitter-scraper
 
